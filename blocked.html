@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Site Blocked - HostLock</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      background: #FFB88C;
+      color: #333;
+    }
+
+    .container {
+      position: relative;
+      padding: 40px;
+      text-align: center;
+      max-width: 500px;
+      width: 90%;
+    }
+
+    .icon {
+      width: 128px;
+      height: 128px;
+      margin-bottom: 24px;
+    }
+
+    .domain {
+      font-size: 36px;
+      color: #333;
+      font-weight: 600;
+      word-break: break-all;
+      margin-bottom: 24px;
+    }
+
+    .message {
+      font-size: 60px;
+      color: #8B4513;
+      line-height: 1.6;
+      font-weight: 600;
+    }
+
+    .message span {
+      position: absolute;
+      bottom: 20px;
+      right: 20px;
+      font-size: 14px;
+      color: #A0522D;
+      opacity: 0.7;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="message">
+        Focus!
+        <br>
+        <span>blocked by HostLock.</span>
+    </div>
+  </div>
+
+  <script>
+    const urlParams = new URLSearchParams(window.location.search);
+    const domain = urlParams.get('domain') || 'Unknown';
+    document.getElementById('domain').textContent = domain;
+
+    if (typeof chrome !== 'undefined' && chrome.runtime) {
+      document.getElementById('icon').src = chrome.runtime.getURL('icon128.png');
+    }
+  </script>
+</body>
+</html>
+

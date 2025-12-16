@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>HostLock</h1>
+      <button id="openOptions" class="open-options-btn" title="Open full dashboard">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M2 2h4v4H2V2zm6 0h4v4H8V2zm-6 6h4v4H2V8zm6 0h4v4H8V8z" stroke="currentColor" stroke-width="1.5" fill="none"/>
+        </svg>
+      </button>
+    </div>
+
+    <div class="section">
+      <h2>Blocked Sites</h2>
+      <div class="input-group">
+        <input type="text" id="blockInput" placeholder="Enter domain (e.g., youtube.com)">
+        <button id="blockBtn">Block</button>
+      </div>
+      <ul id="blockedList"></ul>
+    </div>
+
+    <div class="section">
+      <h2>Top 3 Sites (Unblocked)</h2>
+      <ul id="topSitesList"></ul>
+    </div>
+  </div>
+  <script src="popup.js"></script>
+</body>
+</html>
+

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>HostLock - Dashboard</title>
+  <link rel="stylesheet" href="options.css">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>HostLock</h1>
+      <p class="subtitle">Monitor site usage and block distracting websites</p>
+    </header>
+
+    <div class="add-section">
+      <h2>Add Blocked Site</h2>
+      <div class="input-group">
+        <input type="text" id="blockInput" placeholder="Enter domain (e.g., youtube.com)">
+        <button id="blockBtn">Block</button>
+      </div>
+    </div>
+
+    <div class="tabs">
+      <button class="tab-btn active" data-tab="blocked">Blocked Sites</button>
+      <button class="tab-btn" data-tab="top">Top Sites</button>
+    </div>
+
+    <div class="tab-content">
+      <div id="blocked-tab" class="tab-panel active">
+        <div class="section">
+          <h2>Attempt Time Distribution</h2>
+          <div id="heatmapContainer"></div>
+        </div>
+        <div class="section" style="margin-top: 24px;">
+          <h2>Blocked Sites</h2>
+          <ul id="blockedList"></ul>
+        </div>
+      </div>
+
+      <div id="top-tab" class="tab-panel">
+        <div class="section">
+          <ul id="topSitesList"></ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="options.js"></script>
+</body>
+</html>
+
