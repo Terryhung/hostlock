@@ -88,28 +88,8 @@ function renderBlockedSites() {
     const domainText = document.createTextNode(domain);
     leftContainer.appendChild(domainText);
 
-    let count = 0;
-
-    Object.keys(todayAttempts).forEach((key) => {
-      if (key === domain) {
-        count += todayAttempts[key] || 0;
-      } else {
-        const domainParts = domain.split('.');
-        const keyParts = key.split('.');
-
-        if (keyParts.length >= domainParts.length) {
-          const keySuffix = keyParts.slice(-domainParts.length).join('.');
-          if (keySuffix === domain) {
-            count += todayAttempts[key] || 0;
-          }
-        } else if (domainParts.length >= keyParts.length) {
-          const domainSuffix = domainParts.slice(-keyParts.length).join('.');
-          if (domainSuffix === key) {
-            count += todayAttempts[key] || 0;
-          }
-        }
-      }
-    });
+    // Exact match only - only count attempts for the exact domain
+    const count = todayAttempts[domain] || 0;
 
     if (count > 0) {
       const badge = document.createElement('span');
@@ -240,22 +220,8 @@ function renderTopSites() {
 }
 
 function isBlocked(domain) {
-  return blockedSites.some(blocked => {
-    if (blocked === domain) {
-      return true;
-    }
-    const blockedParts = blocked.split('.');
-    const domainParts = domain.split('.');
-
-    if (domainParts.length >= blockedParts.length) {
-      const domainSuffix = domainParts.slice(-blockedParts.length).join('.');
-      if (domainSuffix === blocked) {
-        return true;
-      }
-    }
-
-    return false;
-  });
+  // Exact match only - blocking youtube.com does not block music.youtube.com
+  return blockedSites.includes(domain);
 }
 
 function formatTime(ms) {
@@ -292,20 +258,10 @@ function renderHeatmap() {
     });
   });
 
-  // Also check other potentially matching domains
+  // Also check other blocked domains (exact match only)
   Object.keys(todayHourData).forEach(key => {
-    const isBlocked = blockedSites.some(blocked => {
-      if (blocked === key) return true;
-      const blockedParts = blocked.split('.');
-      const keyParts = key.split('.');
-      if (keyParts.length >= blockedParts.length) {
-        const keySuffix = keyParts.slice(-blockedParts.length).join('.');
-        if (keySuffix === blocked) return true;
-      }
-      return false;
-    });
-
-    if (isBlocked) {
+    // Exact match only - blocking youtube.com does not block music.youtube.com
+    if (blockedSites.includes(key)) {
       const domainHourData = todayHourData[key] || {};
       Object.keys(domainHourData).forEach(hour => {
         const hourNum = parseInt(hour);

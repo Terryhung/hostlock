@@ -20,6 +20,7 @@ async function updateBlockingRules() {
 
   blockedSites.forEach((domain) => {
     const ruleId = ruleIdCounter++;
+    // Use requestDomains for exact domain matching (not subdomain matching)
     rules.push({
       id: ruleId,
       priority: 1,
@@ -225,20 +226,11 @@ async function cleanupTopSites() {
   Object.keys(siteUsage).forEach(date => {
     const dayUsage = siteUsage[date] || {};
 
-    // Filter out blocked sites and sort by time spent
+    // Filter out blocked sites and sort by time spent (exact match only)
     const unblockedSites = Object.entries(dayUsage)
       .filter(([domain]) => {
-        // Check if domain is blocked
-        return !blockedSites.some(blocked => {
-          if (blocked === domain) return true;
-          const blockedParts = blocked.split('.');
-          const domainParts = domain.split('.');
-          if (domainParts.length >= blockedParts.length) {
-            const domainSuffix = domainParts.slice(-blockedParts.length).join('.');
-            if (domainSuffix === blocked) return true;
-          }
-          return false;
-        });
+        // Check if domain is blocked (exact match only)
+        return !blockedSites.includes(domain);
       })
       .map(([domain, time]) => ({ domain, time }))
       .sort((a, b) => b.time - a.time)
