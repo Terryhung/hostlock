@@ -44,6 +44,30 @@
       </div>
     </div>
   </div>
+
+  <!-- Remove Confirmation Modal -->
+  <div id="removeModal" class="modal">
+    <div class="modal-content">
+      <h3>Confirm Removal</h3>
+      <div id="modalStep1" class="modal-step">
+        <p class="modal-instruction">Please type the following sentence:</p>
+        <p class="modal-text" id="step1Text">I can't resist the temptation, so I want to be lazy again, please let me slack off.</p>
+        <input type="text" id="step1Input" class="modal-input" placeholder="Type the sentence above">
+        <p class="modal-error" id="step1Error"></p>
+      </div>
+      <div id="modalStep2" class="modal-step" style="display: none;">
+        <p class="modal-instruction">Please type the following reversed sentence:</p>
+        <p class="modal-text" id="step2Text"></p>
+        <input type="text" id="step2Input" class="modal-input" placeholder="Type the reversed sentence above">
+        <p class="modal-error" id="step2Error"></p>
+      </div>
+      <div class="modal-buttons">
+        <button id="modalCancel" class="modal-btn modal-btn-cancel">Cancel</button>
+        <button id="modalConfirm" class="modal-btn modal-btn-confirm" disabled>Confirm</button>
+      </div>
+    </div>
+  </div>
+
   <script src="options.js"></script>
 </body>
 </html>
